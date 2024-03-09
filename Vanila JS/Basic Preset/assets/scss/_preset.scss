@@ -1,0 +1,111 @@
+body {
+    background-color: $light-gray;
+}
+
+section {
+    position: relative;
+    margin: 40px auto;
+    width: 180px;
+    h1 {
+    margin-bottom: 24px;
+    font-size: 34px;
+    font-weight: 400;
+    color: $red;
+    }
+    .datePicker{
+        padding: 8px;
+        border: 1px solid $gray;
+        border-radius: 4px;
+        &:focus{
+            outline: 1.5px solid rgb(45, 62, 146);
+        }
+    }
+}
+
+.calendar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 104px;
+    width: var(--calendar-width);
+    height: calc(var(--calendar-width) / 0.88);
+    border-radius: 10px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.20);
+    font-size: calc(var(--calendar-width) / 22);
+    .calendar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 28px;
+        border-radius: 10px 10px 0 0;
+        background-color: $green;
+        color: white;
+        text-align: center;
+        line-height: 1.2;
+        .year-month > p{
+            font-size: 80%;
+        }
+        .nav-btn:before{
+            content: "";
+            display: block;
+            width: 0px;
+            height: 0px;
+            border-top: 10px solid transparent;
+            border-right: 10px solid white;
+            transform: rotate(135deg);
+        }
+        .go-next:before{
+            transform: rotate(-45deg);
+        }
+    }
+    
+    .calendar-grid {
+        padding: 5%;
+        text-align: center;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+      .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap : 10px;
+        color: $gray;
+        margin-bottom: 20px;
+      }
+      
+      .dates {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        flex-grow: 1;
+
+        .date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            max-height: calc(var(--calendar-width) / 8);
+            &:hover {
+                background-color: $green;
+                color: white;
+            }
+        }
+        .prev-month,
+        .next-month {
+            color: $gray;
+        }
+
+        .sunday {
+            color: $red;
+            
+        }
+        .today {
+            border : 1px solid $green;
+        }
+      }
+    }
+}

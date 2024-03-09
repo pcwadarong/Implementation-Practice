@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Document</title>
+    <script>
+        (function(d) {
+          var config = {
+            kitId: 'mar2dqg',
+            scriptTimeout: 3000,
+            async: true
+          },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+      </script>
+</head>
+<body>
+    <div class="img-cover full"></div>
+    <div class="img-cover gradation"></div>
+    <div id = "widget">
+    <form id="login-form" class="hidden">
+        <input type="text" maxlength="15" type="text" required placeholder="What is your name?"/>
+        <button class="hidden">Log In</button>
+    </form>
+    <h1 id="greeting" class="hidden"></h1>
+
+    <div id="clock">
+        <span id="hourAndMin">00:00</span><span id="second">00</span>
+        <div id="day"> 000년 0월 0일 0요일</div>
+    </div>
+
+    <div id="todoList">
+    <form id = "todo-form">
+      <input required type = "text" placeholder = "Write a To Do and press Enter">
+    </form>
+    <ul id = "todo-list"></ul>
+    </div>
+  </div>
+
+    <div id = "quote">
+        <span></span>
+        <span></span>
+    </div>
+
+    <div id = "weather">
+      <span></span>
+      <span></span>
+    </div>    
+  
+
+    <script type="text/javascript" src="./components/clock.js"></script>
+    <script type="text/javascript" src="./components/bgimg.js"></script>
+    <script type="text/javascript" src="./components/login.js"></script>
+    <script type="text/javascript" src="./components/quotes.js"></script>
+    <script type="text/javascript" src="./components/toDo.js"></script>
+    <script type="text/javascript" src="./components/weather.js"></script>
+</body>
+</html>

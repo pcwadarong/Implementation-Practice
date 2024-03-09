@@ -1,0 +1,220 @@
+:root {
+  --calendar-width: 360px;
+}
+
+body {
+  line-height: normal;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+input,
+textarea,
+select,
+table,
+button,
+code {
+  font-family: -apple-system, BlinkMacSystemFont, helvetica, Apple SD Gothic Neo, sans-serif;
+  font-size: 1rem;
+  color: #3B3B3C;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+select,
+input,
+textarea,
+button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input:disabled {
+  background-color: rgba(255, 255, 255, 0);
+  cursor: not-allowed;
+}
+
+select {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+select::-ms-expand {
+  display: none;
+}
+
+input,
+textarea {
+  font-size: inherit;
+  border: 0;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  /* Chrome, Safari, Firefox */
+  color: #95989a;
+}
+input::placeholder,
+textarea::placeholder {
+  /* Chrome, Safari, Firefox */
+  color: #95989a;
+}
+input[readonly]::-moz-placeholder, textarea[readonly]::-moz-placeholder {
+  /* Chrome, Safari, Firefox */
+  color: #95989a;
+}
+input[readonly]::placeholder,
+textarea[readonly]::placeholder {
+  /* Chrome, Safari, Firefox */
+  color: #95989a;
+}
+input[readonly]:-ms-input-placeholder,
+textarea[readonly]:-ms-input-placeholder {
+  /* IE, Edge */
+  color: #95989a;
+}
+
+body {
+  background-color: #F2F4F6;
+}
+
+section {
+  position: relative;
+  margin: 40px auto;
+  width: 180px;
+}
+section h1 {
+  margin-bottom: 24px;
+  font-size: 34px;
+  font-weight: 400;
+  color: #C34834;
+}
+section .datePicker {
+  padding: 8px;
+  border: 1px solid #95989a;
+  border-radius: 4px;
+}
+section .datePicker:focus {
+  outline: 1.5px solid rgb(45, 62, 146);
+}
+
+.calendar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 104px;
+  width: var(--calendar-width);
+  height: calc(var(--calendar-width) / 0.88);
+  border-radius: 10px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.2);
+  font-size: calc(var(--calendar-width) / 22);
+}
+.calendar .calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-radius: 10px 10px 0 0;
+  background-color: #5CD17B;
+  color: white;
+  text-align: center;
+  line-height: 1.2;
+}
+.calendar .calendar-nav .year-month > p {
+  font-size: 80%;
+}
+.calendar .calendar-nav .nav-btn:before {
+  content: "";
+  display: block;
+  width: 0px;
+  height: 0px;
+  border-top: 10px solid transparent;
+  border-right: 10px solid white;
+  transform: rotate(135deg);
+}
+.calendar .calendar-nav .go-next:before {
+  transform: rotate(-45deg);
+}
+.calendar .calendar-grid {
+  padding: 5%;
+  text-align: center;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.calendar .calendar-grid .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  color: #95989a;
+  margin-bottom: 20px;
+}
+.calendar .calendar-grid .dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  flex-grow: 1;
+}
+.calendar .calendar-grid .dates .date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  max-height: calc(var(--calendar-width) / 8);
+}
+.calendar .calendar-grid .dates .date:hover {
+  background-color: #5CD17B;
+  color: white;
+}
+.calendar .calendar-grid .dates .prev-month,
+.calendar .calendar-grid .dates .next-month {
+  color: #95989a;
+}
+.calendar .calendar-grid .dates .sunday {
+  color: #C34834;
+}
+.calendar .calendar-grid .dates .today {
+  border: 1px solid #5CD17B;
+}
