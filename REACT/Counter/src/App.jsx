@@ -1,9 +1,16 @@
-import Component1 from "./components/Component1";
+import Viewer from './components/Viewer';
+import Controller from './components/Controller';
 
 function App() {
   return (
     <>
-    <Component1 />
+      <h1>Simple Counter</h1>
+      <section>
+        <Viewer />
+      </section>
+      <section>
+        <Controller />
+      </section>
     </>
   );
 }

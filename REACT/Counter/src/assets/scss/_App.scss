@@ -1,1 +1,30 @@
 // css of components
+body {
+    background-color: rgb(68, 111, 212);
+}
+
+#root {
+    width: 80%;
+    padding: 50px;
+    margin: 50px auto;
+    border-radius: 9px;
+    text-align: center;
+    background-color: white;
+    section {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 9px;
+        background-color: rgb(237, 237, 237);
+        .controller {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+button {
+    padding: 0.4rem;
+    border: 1px solid rgb(68, 111, 212);
+    border-radius: 5px;
+    background-color:white;
+}
