@@ -129,37 +129,83 @@ textarea::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-body {
-  background-color: rgb(68, 111, 212);
-}
-
 #root {
-  width: 80%;
-  padding: 50px;
+  max-width: 800px;
   margin: 50px auto;
-  border-radius: 9px;
-  text-align: center;
-  background-color: white;
-}
-#root section {
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 9px;
-  background-color: rgb(237, 237, 237);
-}
-#root section .controller {
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
-
-button {
-  flex-grow: 1;
-  padding: 0.4rem 0rem;
-  margin-right: 10px;
-  border: 1px solid rgb(68, 111, 212);
+#root .Header .date {
+  color: rgb(66, 151, 255);
+  margin-top: 10px;
+}
+#root .Editor {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+#root .Editor input {
+  flex: 1;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1.5px solid rgba(66, 151, 255, 0.4);
+}
+#root .Editor input:focus {
+  border: none;
+  outline: 2px solid rgb(66, 151, 255);
+}
+#root .Editor button {
+  padding: 20px;
   border-radius: 5px;
-  background-color: white;
+  color: white;
+  background-color: rgb(66, 151, 255);
 }
-button:last-child {
-  margin-right: 0px;
+#root .List {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  gap: 20px;
+}
+#root .List > input {
+  width: 100%;
+  padding: 15px 0px;
+  border-bottom: 1px solid rgb(222, 222, 222);
+}
+#root .List > input:focus {
+  outline: none;
+  border-bottom: 1.5px solid rgb(66, 151, 255);
+}
+#root .List .TodoItem {
+  display: flex;
+  margin-top: -20px;
+  padding: 20px 0px;
+  border-top: 1px solid rgb(222, 222, 222);
+  align-items: center;
+  gap: 20px;
+}
+#root .List .TodoItem input {
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgb(155, 155, 155);
+  border-radius: 5px;
+  cursor: pointer;
+}
+#root .List .TodoItem input:checked {
+  background-color: rgb(66, 151, 255);
+  border: none;
+}
+#root .List .TodoItem label {
+  flex: 1;
+}
+#root .List .TodoItem .date {
+  font-size: 0.875rem;
+  color: gray;
+}
+#root .List .TodoItem button {
+  padding: 5px;
+  border-radius: 5px;
+  color: gray;
+  background-color: rgb(240, 240, 240);
 }

@@ -1,14 +1,50 @@
-const Controller = () => {
-    return (
-      <div className="controller">
-        <button>-1</button>
-        <button>-10</button>
-        <button>-100</button>
-        <button>+100</button>
-        <button>+10</button>
-        <button>+1</button>
-      </div>
-    );
-  };
+const Controller = ({ oneClickButton }) => {
+  return (
+    <div className="controller">
+      <button
+        onClick={() => {
+          oneClickButton(-1);
+        }}
+      >
+        -1
+      </button>
+      <button
+        onClick={() => {
+          oneClickButton(-1);
+        }}
+      >
+        -10
+      </button>
+      <button
+        onClick={() => {
+          oneClickButton(-100);
+        }}
+      >
+        -100
+      </button>
+      <button
+        onClick={() => {
+          oneClickButton(100);
+        }}
+      >
+        +100
+      </button>
+      <button
+        onClick={() => {
+          oneClickButton(10);
+        }}
+      >
+        +10
+      </button>
+      <button
+        onClick={() => {
+          oneClickButton(1);
+        }}
+      >
+        +1
+      </button>
+    </div>
+  );
+};
 
-  export default Controller;
+export default Controller;

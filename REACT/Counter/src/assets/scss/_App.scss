@@ -23,8 +23,13 @@ body {
 }
 
 button {
-    padding: 0.4rem;
+    flex-grow: 1;
+    padding: 0.4rem 0rem;
+    margin-right: 10px;
     border: 1px solid rgb(68, 111, 212);
     border-radius: 5px;
     background-color:white;
+    &:last-child {
+        margin-right: 0px;
+    }
 }
