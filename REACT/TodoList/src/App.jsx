@@ -1,7 +1,7 @@
 import Editor from './components/Editor';
 import Header from './components/Header';
 import List from './components/List';
-import { useState, uesRef } from 'react';
+import { useState, useRef } from 'react';
 import './assets/css/styles.css';
 
 const mockData = [
@@ -11,24 +11,36 @@ const mockData = [
 ];
 
 function App() {
-  const { Todos, setTodos } = useState(mockData);
+  const [todos, setTodos] = useState(mockData);
+  const isRef = useRef(3);
 
   const onCreate = (content) => {
     const newTodo = {
-      id: 0,
+      id: isRef.current++,
       isDone: false,
       content: content,
       date: new Date().getTime(),
     };
 
-    setTodos([newTodo, ...Todos]);
+    setTodos([newTodo, ...todos]);
+  };
+
+  const onUpdate = (targetId) => {
+    // todo State 값 중, targetId와 일치하는 Id를 갖는 todo item의 isDone 변경
+
+    // 인수: todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
+    setTodos(
+      todos.map((todo) =>
+        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo,
+      ),
+    );
   };
 
   return (
     <>
       <Header />
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} onUpdate={onUpdate} />
     </>
   );
 }
