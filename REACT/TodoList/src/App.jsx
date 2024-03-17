@@ -27,7 +27,6 @@ function App() {
 
   const onUpdate = (targetId) => {
     // todo State 값 중, targetId와 일치하는 Id를 갖는 todo item의 isDone 변경
-
     // 인수: todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
     setTodos(
       todos.map((todo) =>
@@ -36,11 +35,16 @@ function App() {
     );
   };
 
+  // 삭제하기
+  const onDelete = (targetId) => {
+    setTodos(todos.filter((todo) => todo.id !== targetId));
+  };
+
   return (
     <>
       <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </>
   );
 }
