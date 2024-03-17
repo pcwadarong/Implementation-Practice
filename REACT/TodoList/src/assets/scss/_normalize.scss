@@ -3,13 +3,12 @@
 body {
     min-width: 320px;
     line-height: normal;
-    font-size: 14px;
-    color: rgb(29, 29, 29);
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+body,
 input,
 textarea,
 select,
@@ -17,7 +16,7 @@ table,
 button,
 code {
     color: rgb(29, 29, 29);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 *,
