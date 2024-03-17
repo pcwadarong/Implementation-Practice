@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   min-width: 320px;
   line-height: normal;
@@ -8,7 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body,
 input,
 textarea,
 select,
@@ -195,6 +195,14 @@ textarea::-webkit-outer-spin-button {
 #root .List .TodoItem input:checked {
   background-color: rgb(66, 151, 255);
   border: none;
+  position: relative;
+}
+#root .List .TodoItem input:checked::before {
+  content: "✔";
+  color: white;
+  position: absolute;
+  left: 2px;
+  bottom: -1.5px;
 }
 #root .List .TodoItem label {
   flex: 1;

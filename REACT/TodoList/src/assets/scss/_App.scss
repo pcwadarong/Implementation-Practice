@@ -63,6 +63,14 @@
         &:checked {
           background-color: rgb(66, 151, 255);
           border: none;
+          position: relative;
+          &::before {
+            content: '✔';
+            color: white;
+            position: absolute;
+            left: 2px;
+            bottom: -1.5px;
+          }
         }
       }
       label {

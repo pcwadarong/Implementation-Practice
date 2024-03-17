@@ -1,7 +1,7 @@
 import Editor from './components/Editor';
 import Header from './components/Header';
 import List from './components/List';
-import { useState } from 'react';
+import { useState, uesRef } from 'react';
 import './assets/css/styles.css';
 
 const mockData = [
