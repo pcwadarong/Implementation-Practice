@@ -4,14 +4,15 @@ import List from './components/List';
 import { useState, useRef } from 'react';
 import './assets/css/styles.css';
 
-const mockData = [
-  { id: 0, isDone: false, content: '공부', date: new Date().getTime() },
-  { id: 1, isDone: false, content: '과제', date: new Date().getTime() },
-  { id: 2, isDone: false, content: '운동', date: new Date().getTime() },
-];
+// const mockData = [
+//   { id: 0, isDone: false, content: '공부', date: new Date().getTime() },
+//   { id: 1, isDone: false, content: '과제', date: new Date().getTime() },
+//   { id: 2, isDone: false, content: '운동', date: new Date().getTime() },
+// ];
 
 function App() {
-  const [todos, setTodos] = useState(mockData);
+  // const [todos, setTodos] = useState(mockData);
+  const [todos, setTodos] = useState([]);
   const isRef = useRef(3);
 
   const onCreate = (content) => {
