@@ -1,6 +1,7 @@
 import Editor from './components/Editor';
 import Header from './components/Header';
 import List from './components/List';
+import Exam from './components/Exam';
 import { useState, useRef } from 'react';
 import './assets/css/styles.css';
 
@@ -43,9 +44,10 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Exam />
+      {/* <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} /> */}
     </>
   );
 }
