@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ReactNode } from 'react';
 
 export default function SearchableLayout({
@@ -9,18 +9,22 @@ export default function SearchableLayout({
 }) {
   const router = useRouter();
   const [query, setQuery] = useState('');
+  const q = router.query.q as string;
+
+  useEffect(() => {
+    setQuery(q || '');
+  }, [q]);
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
   const onSubmit = () => {
-    if (!query) return;
+    if (!query || q === query) return;
     router.push(`/search?q=${query}`);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log('hello');
     if (e.key === 'Enter') {
       onSubmit();
     }
@@ -35,7 +39,7 @@ export default function SearchableLayout({
           onChange={onChangeSearch}
           onKeyDown={onKeyDown}
           placeholder="Search Books .."
-          className="border p-2 flex-1"
+          className="border p-2 flex-1 rounded-sm"
         />
         <button type="submit" className="p-2" onClick={onSubmit}>
           <svg
