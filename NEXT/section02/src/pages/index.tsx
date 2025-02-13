@@ -1,16 +1,16 @@
 import SearchableLayout from '@/components/searchable-layout';
 import { ReactNode } from 'react';
-import books from '@/mock/books.json';
 import BookItem from '@/components/book-item';
 import { InferGetServerSidePropsType } from 'next';
+import fetchBooks from '@/lib/fetch-books';
+import fetchRandomBooks from '@/lib/fetch-random-books copy';
 
-export const getServerSideProps = () => {
-  const data = 'hello';
+export const getServerSideProps = async () => {
+  const allBooks = await fetchBooks();
+  const randomBooks = await fetchRandomBooks();
 
   return {
-    props: {
-      data,
-    },
+    props: { allBooks, randomBooks },
   };
 };
 
@@ -30,20 +30,20 @@ return {
 */
 
 export default function Home({
-  data,
+  allBooks,
+  randomBooks,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(data);
   return (
     <div className="flex flex-col gap-8 mt-8">
       <section>
         <h2 className="font-bold">New Books</h2>
-        {books.map((book) => (
+        {randomBooks.map((book) => (
           <BookItem key={book.id} {...book} />
         ))}
       </section>
       <section>
         <h2 className="font-bold">All Books</h2>
-        {books.map((book) => (
+        {allBooks.map((book) => (
           <BookItem key={book.id} {...book} />
         ))}
       </section>
