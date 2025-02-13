@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #f1f1f1;
   --foreground: #171717;
 }
 
@@ -25,3 +25,10 @@ body {
     text-wrap: balance;
   }
 }
+
+/*
+global css는 _app.tsx에서만 import가 가능함
+그렇다면 다른 index.css를 index.tsx에서 사용하고 싶다면?
+index.css / import '@/styles/index' / <h1 style={{color: "red"}} /> 에서
+index.module.css / import style from '@/styles/index.module.css' / <h1 className={style.h1}' /> 로 변경함.
+*/
