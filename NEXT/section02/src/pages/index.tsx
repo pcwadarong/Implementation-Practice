@@ -6,8 +6,14 @@ import fetchBooks from '@/lib/fetch-books';
 import fetchRandomBooks from '@/lib/fetch-random-books copy';
 
 export const getServerSideProps = async () => {
-  const allBooks = await fetchBooks();
-  const randomBooks = await fetchRandomBooks();
+  // const allBooks = await fetchBooks();
+  // const randomBooks = await fetchRandomBooks();
+
+  const [allBooks, randomBooks] = await Promise.all([
+    fetchBooks(),
+    fetchRandomBooks(),
+  ]);
+  // 직렬 실행 대신 promise.all로 병렬 실행 유도
 
   return {
     props: { allBooks, randomBooks },
