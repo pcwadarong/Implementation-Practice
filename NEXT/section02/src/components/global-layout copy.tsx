@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 export default function GlobalLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col max-w-xl min-h-screen p-8 pb-20 m-auto gap-8 sm:p-20 bg-white shadow-xl">
+    <div className="flex flex-col max-w-xl min-h-screen p-8 pb-20 m-auto gap-8 bg-white shadow-xl">
       <header>
         <nav>
           <Link href={'/'}>

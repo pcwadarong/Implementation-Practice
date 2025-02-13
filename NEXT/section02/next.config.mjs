@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
+  images: {
+    domains: ['shopping-phinf.pstatic.net'],
+  },
 };
 
 export default nextConfig;
