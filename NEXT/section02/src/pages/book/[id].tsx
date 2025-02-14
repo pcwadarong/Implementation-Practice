@@ -2,6 +2,7 @@ import Image from 'next/image';
 import fetchBook from '@/lib/fetch-book';
 import { GetServerSidePropsContext } from 'next';
 import { InferGetServerSidePropsType } from 'next';
+import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
@@ -44,7 +45,7 @@ export default function Page({
         </div>
       </div>
       <p className="border p-2 flex-1 rounded-sm whitespace-pre-wrap">
-        {description}
+        {convertToHyperlinks(description)}
       </p>
     </section>
   );
