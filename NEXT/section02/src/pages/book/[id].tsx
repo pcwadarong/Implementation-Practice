@@ -1,14 +1,35 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import fetchBook from '@/lib/fetch-book';
-import { GetServerSidePropsContext } from 'next';
-import { InferGetServerSidePropsType } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext,
-) => {
+// 동적 경로일 때 paths의 예시를 몇 가지 제공해야만 가능
+export const getStaticPaths = () => {
+  return {
+    paths: [
+      { params: { id: '1' } },
+      { params: { id: '2' } },
+      { params: { id: '3' } },
+      { params: { id: '4' } },
+    ],
+    fallback: 'blocking',
+  };
+};
+// fallback: false - 나머지 페이지를 not found
+// blocking - 나머지 페이지를 SSR로 생성
+// true - 빈껍데기만 보여줬다가 생성해서 보여줌
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = Number(context.params!.id);
   const book = await fetchBook(id);
+
+  if (!book) {
+    // 404 페이지로 return
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: { book },
@@ -17,8 +38,11 @@ export const getServerSideProps = async (
 
 export default function Page({
   book,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  if (!book) return '문제가 발생했습니다.';
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
+  if (router.isFallback) return '상세 정보를 불러오는 중입니다...'; //fallback 상태
+  // if (!book) return '문제가 발생했습니다.'; //데이터가 아예 없는 상태 -> 위에서 notFound로 return하여 주석처리
 
   const { title, subTitle, description, author, publisher, coverImgUrl } = book;
 

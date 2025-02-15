@@ -1,11 +1,11 @@
 import SearchableLayout from '@/components/searchable-layout';
 import { ReactNode } from 'react';
 import BookItem from '@/components/book-item';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import fetchBooks from '@/lib/fetch-books';
 import fetchRandomBooks from '@/lib/fetch-random-books copy';
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   // const allBooks = await fetchBooks();
   // const randomBooks = await fetchRandomBooks();
 
@@ -24,6 +24,8 @@ export const getServerSideProps = async () => {
 getServerSideProps라고 약속된 서버사이드함수
 컴포넌트보다 먼저 실행되어 컴포넌트에 필요한 데이터를 불러오는 함수
 
++ getStaticProps는 SSG 함수!
+
 export const getServerSideProps = () => {
 return {
   props: {
@@ -38,7 +40,7 @@ return {
 export default function Home({
   allBooks,
   randomBooks,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className="flex flex-col gap-8 mt-8">
       <section>
