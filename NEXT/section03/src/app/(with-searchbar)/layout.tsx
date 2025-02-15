@@ -1,4 +1,4 @@
-import SearchBar from './searchbar';
+import SearchBar from '../components/searchbar';
 // import type { Metadata } from 'next';
 
 // export const metadata: Metadata = {
