@@ -1,18 +1,25 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SearchBar() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [query, setQuery] = useState('');
+
+  const q = searchParams.get('q');
+
+  useEffect(() => {
+    setQuery(q || '');
+  }, [q]);
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
   const onSubmit = () => {
-    if (!query) return;
+    if (!query || q === query) return;
     router.push(`/search?q=${query}`);
   };
 
