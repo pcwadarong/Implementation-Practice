@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import fetchBook from '@/lib/fetch-book';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
+import Head from 'next/head';
 
 // 동적 경로일 때 paths의 예시를 몇 가지 제공해야만 가능
 export const getStaticPaths = () => {
@@ -13,7 +14,7 @@ export const getStaticPaths = () => {
       { params: { id: '3' } },
       { params: { id: '4' } },
     ],
-    fallback: 'blocking',
+    fallback: true,
   };
 };
 // fallback: false - 나머지 페이지를 not found
@@ -41,37 +42,61 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
-  if (router.isFallback) return '상세 정보를 불러오는 중입니다...'; //fallback 상태
+  if (router.isFallback) {
+    //fallback 상태
+    return (
+      <>
+        <Head>
+          <title>한입북스</title>
+          <meta property="og:image" content="/thumbnail.png" />
+          <meta property="og:title" content="한입북스" />
+          <meta
+            property="og:description"
+            content="한입 북스에서 다양한 도서들을 만나보세요."
+          />
+        </Head>
+        <div>상세 정보를 불러오는 중입니다...</div>
+      </>
+    );
+  }
   // if (!book) return '문제가 발생했습니다.'; //데이터가 아예 없는 상태 -> 위에서 notFound로 return하여 주석처리
 
   const { title, subTitle, description, author, publisher, coverImgUrl } = book;
 
   return (
-    <section className="flex flex-col gap-4">
-      <div
-        className="bg-coverImgUrl bg-center relative flex min-w-full justify-center p-5 h-96"
-        style={{ backgroundImage: `url(${coverImgUrl})` }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-        <Image
-          src={coverImgUrl}
-          alt="book cover image"
-          width={270}
-          height={350}
-          className="relative z-10"
-        />
-      </div>
-      <div>
-        <p className="font-bold">{title}</p>
-        <p>{subTitle}</p>
-        <div className="text-gray-400">
-          {author} | {publisher}
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:image" content={coverImgUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+      </Head>
+      <section className="flex flex-col gap-4">
+        <div
+          className="bg-coverImgUrl bg-center relative flex min-w-full justify-center p-5 h-96"
+          style={{ backgroundImage: `url(${coverImgUrl})` }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+          <Image
+            src={coverImgUrl}
+            alt="book cover image"
+            width={270}
+            height={350}
+            className="relative z-10"
+          />
         </div>
-      </div>
-      <p className="border p-2 flex-1 rounded-sm whitespace-pre-wrap">
-        {convertToHyperlinks(description)}
-      </p>
-    </section>
+        <div>
+          <p className="font-bold">{title}</p>
+          <p>{subTitle}</p>
+          <div className="text-gray-400">
+            {author} | {publisher}
+          </div>
+        </div>
+        <p className="border p-2 flex-1 rounded-sm whitespace-pre-wrap">
+          {convertToHyperlinks(description)}
+        </p>
+      </section>
+    </>
   );
 }
 

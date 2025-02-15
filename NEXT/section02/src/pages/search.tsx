@@ -3,6 +3,7 @@ import SearchableLayout from '@/components/searchable-layout';
 import BookItem from '@/components/book-item';
 import fetchBooks from '@/lib/fetch-books';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
@@ -19,14 +20,27 @@ export const getServerSideProps = async (
 export default function Search({
   searchedBooks,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return searchedBooks.length > 1 ? (
-    <div>
-      {searchedBooks.map((book) => (
-        <BookItem key={book.id} {...book} />
-      ))}
-    </div>
-  ) : (
-    <div className='my-10 w-full text-center'> 검색 결과가 없습니다. </div>
+  return (
+    <>
+      <Head>
+        <title>한입북스 - 검색결과</title>
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:title" content="한입북스 - 검색결과" />
+        <meta
+          property="og:description"
+          content="한입 북스에서 다양한 도서들을 만나보세요."
+        />
+      </Head>
+      {searchedBooks.length > 1 ? (
+        <div>
+          {searchedBooks.map((book) => (
+            <BookItem key={book.id} {...book} />
+          ))}
+        </div>
+      ) : (
+        <div className="my-10 w-full text-center">검색 결과가 없습니다.</div>
+      )}
+    </>
   );
 }
 
