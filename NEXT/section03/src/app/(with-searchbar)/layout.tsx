@@ -1,9 +1,10 @@
-import type { Metadata } from 'next';
+import SearchBar from './searchbar';
+// import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: '한입북스 - 검색결과',
-  description: '한입 북스에서 다양한 도서들을 만나보세요.',
-};
+// export const metadata: Metadata = {
+//   title: '한입북스 - 검색결과',
+//   description: '한입 북스에서 다양한 도서들을 만나보세요.',
+// };
 
 export default function SearchLayout({
   children,
@@ -12,7 +13,7 @@ export default function SearchLayout({
 }) {
   return (
     <div>
-      <div>임시 서치바</div>
+      <SearchBar />
       {children}
     </div>
   );
