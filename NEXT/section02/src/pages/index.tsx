@@ -17,8 +17,14 @@ export const getStaticProps = async () => {
 
   return {
     props: { allBooks, randomBooks },
+    revalidate: 3, // 초(second) 단위로 업데이트: ISR
   };
 };
+/*
+ISR: 증분정적재생성
+정적(SSG)로 빌드 타임에 생성하면서도, revalidate 단위로 재성성이 가능함
+
+*/
 
 /*
 getServerSideProps라고 약속된 서버사이드함수
