@@ -60,6 +60,7 @@ async function BookDetail({ id }: { id: string }) {
 async function ReviewList({ bookId }: { bookId: string }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_API_URL}/review/book/${bookId}`,
+    { next: { tags: [`review-${bookId}`] } },
   );
 
   if (!response.ok) {
@@ -89,7 +90,7 @@ export default async function BookInfo({
       <hr className="border-t border-gray-300 my-4" />
       <ReviewEditor bookId={id} />
       <hr className="border-t border-gray-300 my-4" />
-      <h3 className='font-bold text-lg'>Reviews</h3>
+      <h3 className="font-bold text-lg">Reviews</h3>
       <ReviewList bookId={id} />
     </div>
   );
