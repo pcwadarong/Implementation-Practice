@@ -1,4 +1,6 @@
 import SearchBar from '../../components/searchbar';
+import { Suspense } from 'react';
+
 // import type { Metadata } from 'next';
 
 // export const metadata: Metadata = {
@@ -13,7 +15,9 @@ export default function SearchLayout({
 }) {
   return (
     <div>
-      <SearchBar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <SearchBar />
+      </Suspense>
       {children}
     </div>
   );
