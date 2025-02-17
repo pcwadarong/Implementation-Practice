@@ -4,10 +4,12 @@ import { BookDataType } from '@/types';
 export default async function Search({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
+  const params = await searchParams;
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/search?q=${searchParams.q}`,
+    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/search?q=${params.q}`,
   );
 
   if (!response.ok) return <div>오류가 발생했습니다...</div>;

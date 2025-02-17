@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
 
-export default async function BookInfo({ params }: { params: { id: string } }) {
+export default async function BookInfo({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const p = await params;
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/${params.id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/${p.id}`,
   );
   if (!response.ok) return <div>오류가 발생했습니다...</div>;
 
