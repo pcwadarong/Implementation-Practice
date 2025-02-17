@@ -11,12 +11,7 @@ export function generateStaticParams() {
 // page router의 미리 빌드할 예시 페이지를 제공하는 기능과 같음.
 // 실제로 build할 때 1,2,3 페이지가 미리 만들어져서 풀 라우트 캐시로 작동함.
 
-export default async function BookInfo({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+async function BookDetail({ id }: { id: string }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/${id}`,
   );
@@ -56,5 +51,52 @@ export default async function BookInfo({
         {convertToHyperlinks(description)}
       </p>
     </section>
+  );
+}
+
+function ReviewEditor({ bookId }: { bookId: string }) {
+  async function createReviewAction(formData: FormData) {
+    'use server';
+    const content = formData.get('content')?.toString();
+    const author = formData.get('author')?.toString();
+
+    if (!content || !author) return;
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_API_URL}/review`,
+        { method: 'POST', body: JSON.stringify({ bookId, content, author }) },
+      );
+      console.log(bookId, content, author);
+      console.log(response.status);
+    } catch (err) {
+      console.error(err);
+      return;
+    }
+  }
+
+  return (
+    <section>
+      <form action={createReviewAction}>
+        <input name="content" required placeholder="리뷰 내용" />
+        <input name="author" required placeholder="작성자" />
+        <button type="submit">submit</button>
+      </form>
+    </section>
+  );
+}
+
+export default async function BookInfo({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  return (
+    <div className="flex flex-col gap-8">
+      <BookDetail id={id} />
+      <ReviewEditor bookId={id} />
+    </div>
   );
 }
