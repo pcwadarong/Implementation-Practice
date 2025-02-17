@@ -16,9 +16,9 @@ export default async function BookInfo({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const p = await params;
+  const { id } = await params;
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/${p.id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/${id}`,
   );
   if (!response.ok) {
     if (response.status === 404) {
