@@ -1,7 +1,9 @@
 import Image from 'next/image';
-import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
 import { notFound } from 'next/navigation';
-import { createReviewAction } from '@/actions/create-review-action';
+import { ReviewDataType } from '@/types';
+import ReviewEditor from '@/components/review-editor';
+import ReviewItem from '@/components/review-item';
+import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
 
 //export const dynamicParams = false;
 // 아래에서 미리 작성한 1,2,3 외에는 모두 404로 반환함
@@ -20,7 +22,7 @@ async function BookDetail({ id }: { id: string }) {
     if (response.status === 404) {
       notFound();
     }
-    return <div>오류가 발생했습니다...</div>;
+    throw new Error(`Book info fetch failed: ${response.statusText}`);
   }
 
   const book = await response.json();
@@ -55,19 +57,25 @@ async function BookDetail({ id }: { id: string }) {
   );
 }
 
-function ReviewEditor({ bookId }: { bookId: string }) {
+async function ReviewList({ bookId }: { bookId: string }) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_API_URL}/review/book/${bookId}`,
+  );
+
+  if (!response.ok) {
+    throw new Error(`Review fetch failed: ${response.statusText}`);
+  }
+
+  const reviews: ReviewDataType[] = await response.json();
+
   return (
     <section>
-      <form action={createReviewAction}>
-        <input name="bookId" value={bookId} hidden readOnly />
-        <input name="content" required placeholder="리뷰 내용" />
-        <input name="author" required placeholder="작성자" />
-        <button type="submit">submit</button>
-      </form>
+      {reviews.map((review) => (
+        <ReviewItem key={review.id} {...review} />
+      ))}
     </section>
   );
 }
-
 export default async function BookInfo({
   params,
 }: {
@@ -78,7 +86,11 @@ export default async function BookInfo({
   return (
     <div className="flex flex-col gap-8">
       <BookDetail id={id} />
+      <hr className="border-t border-gray-300 my-4" />
       <ReviewEditor bookId={id} />
+      <hr className="border-t border-gray-300 my-4" />
+      <h3 className='font-bold text-lg'>Reviews</h3>
+      <ReviewList bookId={id} />
     </div>
   );
 }
