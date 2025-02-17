@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { convertToHyperlinks } from '@/utils/convertToHyperlinks';
 import { notFound } from 'next/navigation';
+import { createReviewAction } from '@/actions/create-review-action';
 
 //export const dynamicParams = false;
 // 아래에서 미리 작성한 1,2,3 외에는 모두 404로 반환함
@@ -55,29 +56,10 @@ async function BookDetail({ id }: { id: string }) {
 }
 
 function ReviewEditor({ bookId }: { bookId: string }) {
-  async function createReviewAction(formData: FormData) {
-    'use server';
-    const content = formData.get('content')?.toString();
-    const author = formData.get('author')?.toString();
-
-    if (!content || !author) return;
-
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_API_URL}/review`,
-        { method: 'POST', body: JSON.stringify({ bookId, content, author }) },
-      );
-      console.log(bookId, content, author);
-      console.log(response.status);
-    } catch (err) {
-      console.error(err);
-      return;
-    }
-  }
-
   return (
     <section>
       <form action={createReviewAction}>
+        <input name="bookId" value={bookId} hidden readOnly />
         <input name="content" required placeholder="리뷰 내용" />
         <input name="author" required placeholder="작성자" />
         <button type="submit">submit</button>
