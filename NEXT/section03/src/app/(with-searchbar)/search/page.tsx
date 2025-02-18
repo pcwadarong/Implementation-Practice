@@ -3,6 +3,26 @@ import { BookDataType } from '@/types';
 import { Suspense } from 'react';
 import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
 
+import type { Metadata } from 'next';
+
+// 현재 page 컴포넌트가 받는 매개변수를 그대로 전달 받을 수 있음
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}): Promise<Metadata> {
+  const { q } = await searchParams;
+  return {
+    title: `${q} : 한입 북스 검색`,
+    description: '검색 결과입니다..',
+    openGraph: {
+      title: `${q} : 한입 북스 검색`,
+      description: '한입 북스에서 다양한 도서들을 만나보세요.',
+      images: ['/thumbnail.png'],
+    },
+  };
+}
+
 async function SearchResult({ q }: { q: string }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_API_URL}/book/search?q=${q}`,

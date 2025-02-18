@@ -1,5 +1,16 @@
 import BookItem from '@/components/book-item';
 import { BookDataType } from '@/types';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '한입북스',
+  description: '한입 북스에서 다양한 도서들을 만나보세요.',
+  openGraph: {
+    title: '한입 북스',
+    description: '한입 북스에서 다양한 도서들을 만나보세요.',
+    images: ['/thumbnail.png'],
+  },
+};
 
 export const dynamic = 'auto';
 // 특정 페이지의 유형을 !강제로! Static, Dynamic 페이지로 설정
